@@ -1,0 +1,17 @@
+name: Sync Fork
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */3 * * *'  # Runs Every 3 Hours
+
+jobs:
+  fork-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: tgymnich/fork-sync@v2.0.10
+        with:
+          owner: jxxghp
+          base: main
+          head: main
