@@ -231,14 +231,15 @@ class ChainBase(metaclass=ABCMeta):
         """
         return self.run_module("tvdb_info", tvdbid=tvdbid)
 
-    def tmdb_info(self, tmdbid: int, mtype: MediaType) -> Optional[dict]:
+    def tmdb_info(self, tmdbid: int, mtype: MediaType, season: int = None) -> Optional[dict]:
         """
         获取TMDB信息
         :param tmdbid: int
         :param mtype:  媒体类型
+        :param season: 季
         :return: TVDB信息
         """
-        return self.run_module("tmdb_info", tmdbid=tmdbid, mtype=mtype)
+        return self.run_module("tmdb_info", tmdbid=tmdbid, mtype=mtype, season=season)
 
     def bangumi_info(self, bangumiid: int) -> Optional[dict]:
         """
@@ -520,6 +521,14 @@ class ChainBase(metaclass=ABCMeta):
         """
         self.run_module("scrape_metadata", path=path, mediainfo=mediainfo, metainfo=metainfo,
                         transfer_type=transfer_type, force_nfo=force_nfo, force_img=force_img)
+
+    def metadata_img(self, mediainfo: MediaInfo, season: int = None) -> Optional[dict]:
+        """
+        获取图片名称和url
+        :param mediainfo: 媒体信息
+        :param season: 季号
+        """
+        return self.run_module("metadata_img", mediainfo=mediainfo, season=season)
 
     def media_category(self) -> Optional[Dict[str, list]]:
         """
